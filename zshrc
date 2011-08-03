@@ -43,5 +43,18 @@ export SCRAM_ARCH=slc5_amd64_gcc434
 . /afs/hep.wisc.edu/osg/app/cmssoft/cms/slc5_amd64_gcc434/external/python/2.6.4-cms14/etc/profile.d/init.sh
 cd /afs/hep.wisc.edu/osg/app/cmssoft/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms21/ && . ./bin/thisroot.sh; cd -
 
-alias vim ~/bin/vim 
+export CVSROOT=:gserver:cmscvs.cern.ch:/cvs_server/repositories/CMSSW
+export CVS_RSH=ssh
 
+alias vim ~/bin/vim 
+dbsfiles() { dbs search --noheader --query="find file where dataset=$1" }
+alias cmsset='eval `scram ru -sh`; base=$CMSSW_BASE/src'
+alias gridenv='source /cms/sw/glite3_2_5/etc/profile.d/grid_env.sh; source /cms/sw/CRAB_2_7_8p1/crab.sh'
+alias jerbs='condor_q efriis'
+alias manageHDFS='voms-proxy-init; gsissh -p 222 cmsgrid02.hep.wisc.edu' 
+alias voms='voms-proxy-init --voms=cms --hours=48'
+
+jobRep() { jobReportSummary $1/*/*.xml --json-out $2 --size-report --output-dir=`basename $1`/1 }
+
+export hdfs=/hdfs/store/user/efriis/
+export scratch=/data/efriis/

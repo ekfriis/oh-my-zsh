@@ -72,10 +72,13 @@ alias gridenv='source /cms/sw/glite3_2_5/etc/profile.d/grid_env.sh; source /cms/
 alias jerbs='condor_q efriis'
 alias manageHDFS='voms-proxy-init; gsissh -p 222 cmsgrid02.hep.wisc.edu' 
 alias voms='voms-proxy-init --voms=cms --valid 128:0'
-alias kuw='kinit -r 604800 efriis@HEP.WISC.EDU; aklog -c hep.wisc.edu'
-alias klxb='kinit friis@CERN.CH; aklog -c cern.ch'
 alias newroot='cd $scratch/root/; . bin/thisroot.sh; cd -'
 
+# Kerberos management
+export KRB5CCNAME=/tmp/krb5cc_evan_uw
+alias kuw='kinit -r 604800 efriis@HEP.WISC.EDU; aklog -c hep.wisc.edu'
+alias klxb='KRB5CCNAME=/tmp/krb5cc_evan_cern kinit friis@CERN.CH; KRB5CCNAME=/tmp/krb5cc_evan_cern aklog -c cern.ch'
+alias cvs='KRB5CCNAME=/tmp/krb5cc_evan_cern cvs'
 
 jobRep() { jobReportSummary $1/*/*.xml --json-out $2 --output-dir=`basename $1`/1 }
 

@@ -22,7 +22,8 @@ export DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git vi-mode)
+plugins=(git)
+
 
 source $ZSH/oh-my-zsh.sh
 
@@ -61,6 +62,7 @@ alias vim ~/bin/vim
 
 # DBS tools
 dbsfiles() { dbs search --noheader --query="find file where dataset=$1 and file.numevents > 0" }
+dbsfilesT2() { dbs search --noheader --query="find file where dataset=$1 and file.numevents > 0 and site=T2_US_Wisconsin" }
 dbsfilesizes() { dbs search --noheader --query="find file.size where dataset=$1" }
 alias averagesizes="awk '{ SUM += \$1; COUNT += 1 } END {print SUM*1.0/1024/1024/COUNT;}'"
 dbsavgsize() { dbsfilesizes $1 | averagesizes }
@@ -120,10 +122,18 @@ export nobackup=/afs/hep.wisc.edu/cms/efriis
 
 [ -s "/afs/hep.wisc.edu/home/efriis/.scm_breeze/scm_breeze.sh" ] && source "/afs/hep.wisc.edu/home/efriis/.scm_breeze/scm_breeze.sh"
 
-#function git_prompt_info() {
-  #ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    #echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-  #}
+## Setup compiler config
+#. /cvmfs/cms.cern.ch/slc5_amd64_gcc434/external/gcc/4.3.4/etc/profile.d/init.sh
 
-# Setup a nice python
-source /cvmfs/cms.hep.wisc.edu/osg/app/cmssoft/cms/slc5_amd64_gcc462/external/python/2.7.3-cms4/etc/profile.d/init.sh 
+## Setup a nice python
+#source /cvmfs/cms.hep.wisc.edu/osg/app/cmssoft/cms/slc5_amd64_gcc462/external/python/2.7.3-cms4/etc/profile.d/init.sh 
+
+## Setup root
+#pushd /cvmfs/cms.cern.ch/slc5_amd64_gcc434/lcg/root/5.30.02-cms7
+#. bin/thisroot.sh
+#popd
+
+#export LD_LIBRARY_PATH=$HOME/lib:${LD_LIBRARY_PATH}
+
+# Use vi-keybindings
+bindkey -v

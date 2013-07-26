@@ -40,18 +40,6 @@ if [ -f /afs/hep.wisc.edu/cms/setup/bashrc ]; then
 	source /afs/hep.wisc.edu/cms/setup/bashrc
 fi
 
-#export SCRAM_ARCH=slc5_amd64_gcc434
-
-#. /afs/hep.wisc.edu/osg/app/cmssoft/cms/slc5_amd64_gcc434/external/python/2.6.4-cms14/etc/profile.d/init.sh
-#cd /afs/hep.wisc.edu/osg/app/cmssoft/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms21/ && . ./bin/thisroot.sh; cd -
-#. /cvmfs/cms.cern.ch/slc5_amd64_gcc434/external/gcc/4.3.4/etc/profile.d/init.sh
-#cd /cvmfs/cms.cern.ch/slc5_amd64_gcc434/lcg/root/5.30.02-cms7
-#. bin/thisroot.sh
-#cd -
-#cd /cvmfs/cms.cern.ch/slc5_amd64_gcc434/external/python/2.6.4-cms16/etc/profile.d
-#source init.sh
-#cd -
-
 
 export CVSROOT=:gserver:cmssw.cvs.cern.ch:/local/reps/CMSSW
 export CVS_RSH=ssh
@@ -68,7 +56,7 @@ alias averagesizes="awk '{ SUM += \$1; COUNT += 1 } END {print SUM*1.0/1024/1024
 dbsavgsize() { dbsfilesizes $1 | averagesizes }
 
 alias cmsset='eval `scram ru -sh`; base=$CMSSW_BASE/src'
-alias gridenv='source /cms/sw/glite3_2_5/etc/profile.d/grid_env.sh; source /cms/sw/CRAB_2_8_1/crab.sh'
+alias gridenv='source /cms/sw/glite3_2_5/etc/profile.d/grid_env.sh; source /cms/sw/CRAB_2_8_5/crab.sh'
 alias jerbs='condor_q efriis'
 alias manageHDFS='voms-proxy-init; gsissh -p 222 cmsgrid02.hep.wisc.edu' 
 alias voms='voms-proxy-init --voms=cms --valid 128:0'
@@ -79,6 +67,7 @@ export KRB5CCNAME=/tmp/krb5cc_evan_uw
 alias kuw='kinit -r 604800 efriis@HEP.WISC.EDU; aklog -c hep.wisc.edu'
 alias klxb='KRB5CCNAME=/tmp/krb5cc_evan_cern kinit friis@CERN.CH; KRB5CCNAME=/tmp/krb5cc_evan_cern aklog -c cern.ch'
 alias cvs='KRB5CCNAME=/tmp/krb5cc_evan_cern cvs'
+alias svn='KRB5CCNAME=/tmp/krb5cc_evan_cern svn'
 
 jobRep() { jobReportSummary $1/*/*.xml --json-out $2 --output-dir=`basename $1`/1 }
 
